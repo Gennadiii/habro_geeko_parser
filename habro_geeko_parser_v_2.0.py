@@ -2,10 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import os.path
 
-direction = os.path.expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser2.txt')
+direction = os.path.expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 first_titles_list = []
-habra_flag = None
-geeko_flag = None
+habra_exception = ['тензорной']
+geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons']
 
 doc = open(direction, 'r') # Getting articles that I've already seen
 line = doc.readline()
@@ -22,15 +22,18 @@ for j in range(20):
 	list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 	for title in list_of_titles:
+		flag = None
 		if first_titles_list[0] == title.text:
 			print('\n\n\n\n\n\n')
-			habra_flag = True
+			flag = 'Stop'
 			break
-		elif 'тензорной' in title.text:
-			continue
-		else:
+		for exception in habra_exception:
+			if exception in title.text:
+				flag = 'exception'
+				break
+		if flag != 'exception':
 			print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
-	if habra_flag:
+	if flag == 'Stop':
 		break
 	driver.find_element_by_id('next_page').click()
 
@@ -42,14 +45,17 @@ for j in range(20):
 	list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 	for title in list_of_titles:
+		flag = None
 		if first_titles_list[1] == title.text:
-			geeko_flag = True
+			flag = 'Stop'
 			break
-		elif 'Итана' in title.text:
-			continue
-		else:
+		for exception in geeko_exception:
+			if exception in title.text:
+				flag = 'exception'
+				break
+		if flag != 'exception':
 			print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
-	if geeko_flag:
+	if flag == 'Stop':
 		break
 	driver.find_element_by_id('next_page').click()
 
