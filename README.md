@@ -4,3 +4,6 @@ Parse 5 first pages of habr and geektimes, writes to a file titles and their lin
 Version 2.0
 Use only Pyhon IDLE
 Takes last seen articles from a file. Parses all articles and prints them until finds article from a file. Avoids articles I don't wanna see. Overwrights current articles to the file.
+
+Version 2.1
+Works for console. Strongly recommend not to use this one )
