@@ -1,13 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import os.path
+from os.path import expanduser
+from shutil import copyfile
 
-direction = os.path.expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
+main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
+copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
 first_titles_list = []
-habra_exception = ['тензорной']
+habra_exception = ['тензорной', 'PHP-Дайджест', 'Дайджест интересных материалов для мобильного разработчика']
 geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons']
 
-doc = open(direction, 'r') # Getting articles that I've already seen
+copyfile(main_direction, copy_direction)
+
+doc = open(main_direction, 'r') # Getting articles that I've already seen
 line = doc.readline()
 while line:
 	first_titles_list.append(line[:-1])
@@ -60,7 +64,7 @@ for j in range(20):
 	driver.find_element_by_id('next_page').click()
 
 
-doc = open(direction, 'w') # Writing current articles to the file
+doc = open(main_direction, 'w') # Writing current articles to the file
 doc.write(first_habratitle + '\n' + first_geekotitle + '\n')
 doc.close()
 driver.close()
