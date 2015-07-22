@@ -29,22 +29,23 @@ for j in range(2):
         doc.write(list_of_titles[j].text + '\n')
 
 for j in range(20):
+	list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
-    for title in list_of_titles:
-        flag = None
-        if first_titles_list[0] == title.text or first_titles_list[1] == title.text:
-            print('\n\n\n\n\n\n')
-            flag = 'Stop'
-            break
-        for exception in habra_exception:
-            if exception in title.text:
-                flag = 'exception'
-                break
-        if flag != 'exception':
-            print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
-    if flag == 'Stop':
-        break
-    driver.find_element_by_id('next_page').click()
+	for title in list_of_titles:
+		flag = None
+		if first_titles_list[0] == title.text or first_titles_list[1] == title.text:
+		    print('\n\n\n\n\n\n')
+		    flag = 'Stop'
+		    break
+		for exception in habra_exception:
+		    if exception in title.text:
+		        flag = 'exception'
+		        break
+		if flag != 'exception':
+			print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+	if flag == 'Stop':
+		break
+	driver.find_element_by_id('next_page').click()
 
 
 driver.get('http://geektimes.ru/')
@@ -56,21 +57,22 @@ for j in range(2):
 doc.close()
 
 for j in range(20):
+	list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
-    for title in list_of_titles:
-        flag = None
-        if first_titles_list[2] == title.text or first_titles_list[3] == title.text:
-            flag = 'Stop'
-            break
-        for exception in geeko_exception:
-            if exception in title.text:
-                flag = 'exception'
-                break
-        if flag != 'exception':
-            print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
-    if flag == 'Stop':
-        break
-    driver.find_element_by_id('next_page').click()
+	for title in list_of_titles:
+		flag = None
+		if first_titles_list[2] == title.text or first_titles_list[3] == title.text:
+		    flag = 'Stop'
+		    break
+		for exception in geeko_exception:
+		    if exception in title.text:
+		        flag = 'exception'
+		        break
+		if flag != 'exception':
+		    print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+	if flag == 'Stop':
+		break
+	driver.find_element_by_id('next_page').click()
 
 driver.close()
 driver.quit()
