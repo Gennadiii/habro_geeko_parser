@@ -6,7 +6,8 @@ from shutil import copyfile
 main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
 first_titles_list = []
-habra_exception = ['тензорной', 'PHP-Дайджест', 'Дайджест интересных материалов для мобильного разработчика']
+habra_exception = ['материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
+'из мира Drupal', 'материалов по Ruby', 'PHP-Дайджест', 'для iOS-разработчиков', 'из мира веб-разработки и IT']
 geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons']
 
 copyfile(main_direction, copy_direction)
@@ -25,7 +26,7 @@ driver.get('http://habrahabr.ru/')
 list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 doc = open(main_direction, 'w') # Writing current articles to the file
-for j in range(2):
+for j in range(5):
         doc.write(list_of_titles[j].text + '\n')
 
 for j in range(20):
@@ -33,7 +34,7 @@ for j in range(20):
 
 	for title in list_of_titles:
 		flag = None
-		if first_titles_list[0] == title.text or first_titles_list[1] == title.text:
+		if title.text in first_titles_list:
 		    print('\n\n\n\n\n\n')
 		    flag = 'Stop'
 		    break
@@ -52,7 +53,7 @@ driver.get('http://geektimes.ru/')
 
 list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
-for j in range(2):
+for j in range(5):
         doc.write(list_of_titles[j].text + '\n')
 doc.close()
 
@@ -61,7 +62,7 @@ for j in range(20):
 
 	for title in list_of_titles:
 		flag = None
-		if first_titles_list[2] == title.text or first_titles_list[3] == title.text:
+		if title.text in first_titles_list:
 		    flag = 'Stop'
 		    break
 		for exception in geeko_exception:
