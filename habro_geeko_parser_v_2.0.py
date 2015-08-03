@@ -12,7 +12,7 @@ geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons']
 
 copyfile(main_direction, copy_direction)
 
-doc = open(main_direction, 'r') # Getting articles that I've already seen
+doc = open(main_direction, 'r', encoding="utf8") # Getting articles that I've already seen
 line = doc.readline()
 while line:
     first_titles_list.append(line[:-1])
@@ -25,7 +25,7 @@ driver.get('http://habrahabr.ru/')
 
 list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
-doc = open(main_direction, 'w') # Writing current articles to the file
+doc = open(main_direction, 'w', encoding="utf8") # Writing current articles to the file
 for j in range(5):
         doc.write(list_of_titles[j].text + '\n')
 
