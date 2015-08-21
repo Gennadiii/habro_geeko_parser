@@ -8,7 +8,10 @@ copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_pa
 first_titles_list = []
 habra_exception = ['материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
 'из мира Drupal', 'материалов по Ruby', 'PHP-Дайджест', 'для iOS-разработчиков', 'из мира веб-разработки и IT']
-geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons']
+geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons', 'Роскосмос']
+
+habra_count = 0
+geeko_count = 0
 
 copyfile(main_direction, copy_direction)
 
@@ -44,6 +47,7 @@ for j in range(20):
 		        break
 		if flag != 'exception':
 			print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+			habra_count += 1
 	if flag == 'Stop':
 		break
 	driver.find_element_by_id('next_page').click()
@@ -71,9 +75,12 @@ for j in range(20):
 		        break
 		if flag != 'exception':
 		    print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+		    geeko_count += 1
 	if flag == 'Stop':
 		break
 	driver.find_element_by_id('next_page').click()
+
+print('\n\n\n' + str(habra_count) + ' + ' + str(geeko_count) + ' = ' + str(habra_count + geeko_count) + '\n\n\n')
 
 driver.close()
 driver.quit()
