@@ -6,12 +6,13 @@ from shutil import copyfile
 main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
 first_titles_list = []
-habra_exception = ['материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
+habra_exception = ['Windows 10 по 10', 'материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
 'из мира Drupal', 'материалов по Ruby', 'PHP-Дайджест', 'для iOS-разработчиков', 'из мира веб-разработки и IT']
-geeko_exception = ['Итана', 'NASA', 'НАСА', 'New Horizons', 'Роскосмос']
+geeko_exception = ['Curiosity', 'Итана', 'NASA', 'НАСА', 'New Horizons', 'Роскосмос', 'Зонд Dawn']
 
 habra_count = 0
 geeko_count = 0
+count_rejected = 0
 
 copyfile(main_direction, copy_direction)
 
@@ -24,7 +25,7 @@ doc.close()
 
 driver = webdriver.Firefox()
 driver.implicitly_wait(45)
-driver.get('http://habrahabr.ru/')
+driver.get('http://habrahabr.ru/') # driver.get('http://habrahabr.ru/page4/')
 
 list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
@@ -44,6 +45,7 @@ for j in range(20):
 		for exception in habra_exception:
 		    if exception in title.text:
 		        flag = 'exception'
+		        count_rejected += 1
 		        break
 		if flag != 'exception':
 			print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
@@ -53,7 +55,7 @@ for j in range(20):
 	driver.find_element_by_id('next_page').click()
 
 
-driver.get('http://geektimes.ru/')
+driver.get('http://geektimes.ru/') #driver.get('http://geektimes.ru/page4/')
 
 list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
@@ -72,6 +74,7 @@ for j in range(20):
 		for exception in geeko_exception:
 		    if exception in title.text:
 		        flag = 'exception'
+		        count_rejected += 1
 		        break
 		if flag != 'exception':
 		    print(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
@@ -81,6 +84,7 @@ for j in range(20):
 	driver.find_element_by_id('next_page').click()
 
 print('\n\n\n' + str(habra_count) + ' + ' + str(geeko_count) + ' = ' + str(habra_count + geeko_count) + '\n\n\n')
+print(str(count_rejected) + ' rejected')
 
 driver.close()
 driver.quit()
