@@ -5,6 +5,7 @@ from shutil import copyfile
 from time import sleep
 
 parol = '*'
+milo = 'g.mishchevskii@gmail.com'
 
 main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
@@ -33,7 +34,7 @@ driver.get('http://habrahabr.ru/') # driver.get('http://habrahabr.ru/page4/')
 enter = driver.find_element_by_xpath("//span[@class='g-icon g-icon-lock']")
 enter.click()
 mail = driver.find_element_by_xpath("//input[@type='email']")
-mail.send_keys("g.mishchevskii@gmail.com")
+mail.send_keys(milo)
 password = driver.find_element_by_xpath("//input[@type='password']")
 password.send_keys(parol)
 submit = driver.find_element_by_xpath("//button[@type='submit']")
