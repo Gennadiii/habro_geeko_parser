@@ -4,8 +4,8 @@ from os.path import expanduser
 from shutil import copyfile
 from time import sleep
 
-parol = '*'
-milo = 'g.mishchevskii@gmail.com'
+parol = ''
+milo = ''
 
 main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
@@ -29,7 +29,8 @@ doc.close()
 
 driver = webdriver.Firefox()
 driver.implicitly_wait(45)
-driver.get('http://habrahabr.ru/') # driver.get('http://habrahabr.ru/page4/')
+driver.get('http://habrahabr.ru/')
+#driver.get('http://habrahabr.ru/page4/')
 
 enter = driver.find_element_by_xpath("//span[@class='g-icon g-icon-lock']")
 enter.click()
@@ -42,13 +43,10 @@ submit.click()
 feed = driver.find_element_by_xpath("//span[@class='name' and  contains(.,'По подписке')]")
 feed.click()
 
-list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
-
-doc = open(main_direction, 'w', encoding="utf8") # Writing current articles to the file
-for j in range(5):
-        doc.write(list_of_titles[j].text + '\n')
+list_of_titles_habr_to_file = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 for j in range(20):
+#for j in range(4):
 	list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 	for title in list_of_titles:
@@ -70,26 +68,17 @@ for j in range(20):
 	driver.find_element_by_id('next_page').click()
 
 
-driver.get('http://geektimes.ru/') #driver.get('http://geektimes.ru/page4/')
+driver.get('http://geektimes.ru/')
+#driver.get('http://geektimes.ru/page4/')
+sleep(2)
 
-# enter = driver.find_element_by_xpath("//span[@class='g-icon g-icon-lock']")
-# enter.click()
-# mail = driver.find_element_by_xpath("//input[@type='email']")
-# mail.send_keys("g.mishchevskii@gmail.com")
-# password = driver.find_element_by_xpath("//input[@type='password']")
-# password.send_keys(parol)
-# submit = driver.find_element_by_xpath("//button[@type='submit']")
-# submit.click()
 feed = driver.find_element_by_xpath("//span[@class='name' and  contains(.,'По подписке')]")
 feed.click()
 
-list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
-
-for j in range(5):
-        doc.write(list_of_titles[j].text + '\n')
-doc.close()
+list_of_titles_geek_to_file = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 for j in range(20):
+#for j in range(4):
 	list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
 	for title in list_of_titles:
@@ -108,6 +97,13 @@ for j in range(20):
 	if flag == 'Stop':
 		break
 	driver.find_element_by_id('next_page').click()
+
+doc = open(main_direction, 'w', encoding="utf8") # Writing current articles to the file
+
+for j in range(5):
+        doc.write(list_of_titles_habr_to_file[j].text + '\n')
+        doc.write(list_of_titles_geek_to_file[j].text + '\n')
+doc.close()
 
 print('\n\n\n' + str(habra_count) + ' + ' + str(geeko_count) + ' = ' + str(habra_count + geeko_count) + '\n\n\n')
 print(str(count_rejected) + ' rejected')
