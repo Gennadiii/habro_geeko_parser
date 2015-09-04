@@ -43,7 +43,8 @@ submit.click()
 feed = driver.find_element_by_xpath("//span[@class='name' and  contains(.,'По подписке')]")
 feed.click()
 
-list_of_titles_habr_to_file = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+list_of_titles_habr_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+list_of_titles_habr_to_file = [title.text for title in list_of_titles_habr_to_file_elements]
 
 for j in range(20):
 #for j in range(4):
@@ -75,7 +76,8 @@ sleep(2)
 feed = driver.find_element_by_xpath("//span[@class='name' and  contains(.,'По подписке')]")
 feed.click()
 
-list_of_titles_geek_to_file = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+list_of_titles_geek_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+list_of_titles_geek_to_file = [title.text for title in list_of_titles_geek_to_file_elements]
 
 for j in range(20):
 #for j in range(4):
@@ -101,8 +103,8 @@ for j in range(20):
 doc = open(main_direction, 'w', encoding="utf8") # Writing current articles to the file
 
 for j in range(5):
-        doc.write(list_of_titles_habr_to_file[j].text + '\n')
-        doc.write(list_of_titles_geek_to_file[j].text + '\n')
+        doc.write(list_of_titles_habr_to_file[j] + '\n')
+        doc.write(list_of_titles_geek_to_file[j] + '\n')
 doc.close()
 
 print('\n\n\n' + str(habra_count) + ' + ' + str(geeko_count) + ' = ' + str(habra_count + geeko_count) + '\n\n\n')
