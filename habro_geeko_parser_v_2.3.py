@@ -50,7 +50,7 @@ feed = driver.find_element_by_xpath("//span[@class='tab-item__value' and  contai
 list_of_titles_habr_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 list_of_titles_habr_to_file = [title.text for title in list_of_titles_habr_to_file_elements]
 
-for j in range(20):
+for j in range(6):
 #for j in range(4):
     list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
@@ -66,7 +66,10 @@ for j in range(20):
                 count_rejected += 1
                 break
         if flag != 'exception':
-            news.write(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+            try:
+                news.write(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+            except Exception:
+                news.write(str(title.text.encode('unicode_escape')) + '\n' + str(title.get_attribute('href')) + '\n\n')
             habra_count += 1
     if flag == 'Stop':
         break
@@ -83,7 +86,7 @@ feed.click()
 list_of_titles_geek_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 list_of_titles_geek_to_file = [title.text for title in list_of_titles_geek_to_file_elements]
 
-for j in range(20):
+for j in range(6):
 #for j in range(4):
     list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
@@ -98,7 +101,10 @@ for j in range(20):
                 count_rejected += 1
                 break
         if flag != 'exception':
-            news.write(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+            try:
+                news.write(title.text + '\n' + str(title.get_attribute('href')) + '\n\n')
+            except Exception:
+                news.write(str(title.text.encode('unicode_escape')) + '\n' + str(title.get_attribute('href')) + '\n\n')
             geeko_count += 1
     if flag == 'Stop':
         break
