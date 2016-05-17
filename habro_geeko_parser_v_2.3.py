@@ -5,8 +5,8 @@ from shutil import copyfile
 from time import sleep
 from os import system, chdir
 
-parol = ''
-milo = ''
+parol = 
+milo = 
 
 main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
@@ -37,6 +37,7 @@ while line:
 doc.close()
 
 driver = webdriver.Firefox()
+# driver = webdriver.Chrome(expanduser(r'~\Dropbox\Work\Python\chromedriver.exe'))
 driver.get('http://habrahabr.ru/')
 #driver.get('http://habrahabr.ru/page4/')
 
@@ -47,12 +48,13 @@ submit = driver.find_element_by_xpath("//button[@type='submit']").click()
 driver.implicitly_wait(3000)
 feed = driver.find_element_by_xpath("//span[@class='tab-item__value' and  contains(.,'По подписке')]").click()
 
-list_of_titles_habr_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+titles = "//*[@class='post__title_link']"
+list_of_titles_habr_to_file_elements = driver.find_elements_by_xpath(titles)
 list_of_titles_habr_to_file = [title.text for title in list_of_titles_habr_to_file_elements]
 
-for j in range(6):
+for j in range(30):
 #for j in range(4):
-    list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+    list_of_titles = driver.find_elements_by_xpath(titles)
 
     for title in list_of_titles:
         flag = None
@@ -86,7 +88,7 @@ feed.click()
 list_of_titles_geek_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 list_of_titles_geek_to_file = [title.text for title in list_of_titles_geek_to_file_elements]
 
-for j in range(6):
+for j in range(30):
 #for j in range(4):
     list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
 
