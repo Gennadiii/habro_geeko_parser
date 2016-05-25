@@ -12,7 +12,7 @@ main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_pa
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
 habra_geeko_news = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_news.txt')
 first_titles_list = []
-habra_exception = ['Functional C', 'Подпольный рынок кардеров', 'Windows 10 по 10', 'материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
+habra_exception = ['из мира фронтенда за последнюю неделю', 'Functional C', 'Подпольный рынок кардеров', 'Windows 10 по 10', 'материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
 'из мира Drupal', 'материалов по Ruby', 'PHP-Дайджест', 'для iOS-разработчиков', 'из мира веб-разработки и IT']
 geeko_exception = ['космоса за неделю', 'Cassini', 'космодром', 'Модули Laurent', 'Проект «Око»', 'МКС', 'Philae', 'Марс', 'Фотографии космоса', 'Церер', 'Curiosity', 'Итана', 'NASA', 'НАСА', 'New Horizons', 'Роскосмос', 'Зонд Dawn']
 
@@ -85,12 +85,12 @@ sleep(2)
 feed = driver.find_element_by_xpath("//span[@class='tab-item__value' and  contains(.,'По подписке')]")
 feed.click()
 
-list_of_titles_geek_to_file_elements = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+list_of_titles_geek_to_file_elements = driver.find_elements_by_xpath(titles)
 list_of_titles_geek_to_file = [title.text for title in list_of_titles_geek_to_file_elements]
 
 for j in range(30):
 #for j in range(4):
-    list_of_titles = driver.find_elements_by_xpath("//h1[@class='title']/a[@class='post_title']")
+    list_of_titles = driver.find_elements_by_xpath(titles)
 
     for title in list_of_titles:
         flag = None
