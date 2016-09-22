@@ -6,13 +6,13 @@ from time import sleep
 from os import system, chdir
 
 parol = 
-milo = 
+milo = ''
 
 main_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser.txt')
 copy_direction = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_parser_copy.txt')
 habra_geeko_news = expanduser(r'~\Dropbox\Work\Python\Programms\txt\habra_geeko_news.txt')
 first_titles_list = []
-habra_exception = ['из мира фронтенда за последнюю неделю', 'Functional C', 'Подпольный рынок кардеров', 'Windows 10 по 10', 'материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
+habra_exception = ['IaaS-дайджест', 'из мира фронтенда за последнюю неделю', 'Functional C', 'Подпольный рынок кардеров', 'Windows 10 по 10', 'материалов по Ruby', 'из мира Drupal', 'тензорной', 'Дайджест интересных материалов для мобильного разработчика', \
 'из мира Drupal', 'материалов по Ruby', 'PHP-Дайджест', 'для iOS-разработчиков', 'из мира веб-разработки и IT']
 geeko_exception = ['космоса за неделю', 'Cassini', 'космодром', 'Модули Laurent', 'Проект «Око»', 'МКС', 'Philae', 'Марс', 'Фотографии космоса', 'Церер', 'Curiosity', 'Итана', 'NASA', 'НАСА', 'New Horizons', 'Роскосмос', 'Зонд Dawn']
 
@@ -41,7 +41,7 @@ driver = webdriver.Firefox()
 driver.get('http://habrahabr.ru/')
 #driver.get('http://habrahabr.ru/page4/')
 
-enter = driver.find_element_by_xpath("//span[@class='g-icon g-icon-lock']").click()
+enter = driver.find_element_by_id("login").click()
 mail = driver.find_element_by_xpath("//input[@type='email']").send_keys(milo)
 password = driver.find_element_by_xpath("//input[@type='password']").send_keys(parol)
 submit = driver.find_element_by_xpath("//button[@type='submit']").click()
