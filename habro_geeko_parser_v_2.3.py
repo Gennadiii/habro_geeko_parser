@@ -82,7 +82,7 @@ driver.get('http://geektimes.ru/')
 #driver.get('http://geektimes.ru/page4/')
 sleep(2)
 
-feed = driver.find_element_by_xpath("//span[@class='tab-item__value' and  contains(.,'По подписке')]")
+feed = driver.find_element_by_xpath("//span[@class='tabs-menu__item-text ' and  contains(.,'По подписке')]")
 feed.click()
 
 list_of_titles_geek_to_file_elements = driver.find_elements_by_xpath(titles)
