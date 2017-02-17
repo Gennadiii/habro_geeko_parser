@@ -46,7 +46,7 @@ mail = driver.find_element_by_xpath("//input[@type='email']").send_keys(milo)
 password = driver.find_element_by_xpath("//input[@type='password']").send_keys(parol)
 submit = driver.find_element_by_xpath("//button[@type='submit']").click()
 driver.implicitly_wait(3000)
-feed = driver.find_element_by_xpath("//span[@class='tab-item__value' and  contains(.,'По подписке')]").click()
+feed = driver.find_element_by_xpath("//span[@class='tabs-menu__item-text ' and  contains(.,'По подписке')]").click()
 
 titles = "//*[@class='post__title_link']"
 list_of_titles_habr_to_file_elements = driver.find_elements_by_xpath(titles)
